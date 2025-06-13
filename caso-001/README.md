@@ -23,3 +23,43 @@ Este proyecto es una API REST básica construida con Node.js, sin frameworks, qu
     ```
     npm run dev
     ```
+
+## Docker Compose
+1. Construir y levantar los contenedores
+    ```bash
+    docker-compose up --build
+    ```
+    Esto ejecutará dos servicios:
+     - `app`: la API Node.js (puerto 3000)
+     - `mysql`: el contenedor de base de datos MySQL (puerto 3307)
+
+2. Apagar los contenedores
+    ```bash
+    docker-compose down
+    ```
+    
+### Variables de entorno
+    Crea un archivo .env en la raíz con el siguiente contenido:  
+
+    ```
+     DATABASE_HOST=mysql  
+     DATABASE_PORT=3306  
+     DATABASE_USER=root  
+     DATABASE_PASSWORD=tu_clave  
+     DATABASE_NAME=product_master  
+    ```
+
+### Logs
+Para ver los logs de la API en tiempo real, podés usar:
+```bash
+docker-compose logs -f app
+```
+
+## Testing con Postman
+Se incluye la colección `Caso 001.postman_collection.json` en la raíz del proyecto.
+
+### Importarla en Postman
+1. Abrí Postman.  
+2. Hacé clic en Import.  
+3. Seleccioná el archivo `Caso 001.postman_collection.json`.  
+4. Usá los endpoints para testear la API en `http://localhost:3000`.  

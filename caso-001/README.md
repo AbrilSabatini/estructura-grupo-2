@@ -8,7 +8,7 @@ Sirve productos desde una base de datos MySQL y está preparado tanto para corre
 ## 🧰 Tecnologías utilizadas
 ⚙️ Node.js (sin frameworks)  
 🐬 MySQL  
-🐳 Docker
+🐳 Docker  
 🧪 Postman (para testing de endpoints)  
 📦 dotenv (para variables de entorno)  
 

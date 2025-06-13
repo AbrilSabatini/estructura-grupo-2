@@ -5,27 +5,20 @@ Este proyecto es una API REST básica construida con Node.js, sin frameworks, qu
 
 ## Inicio
 
-1. Clonar el repositorio:
-
-    ```
-    git clone https://github.com/AbrilSabatini/estructura-caso-001.git
-    cd Caso-001
-    ```
-
-2. Instalar las dependencias:
+1. Instalar las dependencias:
 
     ```
     npm install
     ```
 
-3. Crear un archivo `.env` a partir de `.env.template` y completar los datos de conexión a tu base de datos MySQL.
+2. Crear un archivo `.env` a partir de `.env.template` y completar los datos de conexión a tu base de datos MySQL.
 
-4. Inicializar la base de datos:
+3. Inicializar la base de datos:
 
     Podés usar el archivo `init.sql` ubicado en la raíz del proyecto para crear la base de datos y poblarla con datos de ejemplo.  
 
 
-5. Ejecutar la aplicación:
+4. Ejecutar la aplicación:
 
     ```
     npm run dev

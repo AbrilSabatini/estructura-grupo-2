@@ -1,18 +1,36 @@
+
 # Caso 001 - API REST con Node.js
 
-Este proyecto es una API REST básica construida con Node.js, sin frameworks, que sirve información de productos desde una base de datos MySQL.
+Bienvenido/a 👋
+Este proyecto es un ejemplo básico de una API REST usando Node.js sin frameworks.
+Sirve productos desde una base de datos MySQL y está preparado tanto para correr manualmente como en Docker.
                
+## 🧰 Tecnologías utilizadas
+⚙️ Node.js (sin frameworks)  
+🐬 MySQL  
+🐳 Docker
+🧪 Postman (para testing de endpoints)  
+📦 dotenv (para variables de entorno)  
 
 ## Inicio manual
+1. clona el repositorio 
+    ```bash
+    git clone https://github.com/AbrilSabatini/estructura-grupo-2.git 
+    ```
+2. dirigete a la carpeta del proyecto   
+    
+    ```bash
+    cd estructura-grupo-2/caso-001
+    ```
 💡 ***Asegurate de estar ubicado en*** `estructura-grupo-2/caso-001`.  
 
-1. Instalar las dependencias:
+3. Instalar las dependencias:
 
     ```
     npm install
     ```
-
-2. Crear un archivo `.env` a partir de `.env.template` y completar los datos de conexión a tu base de datos MySQL.
+## 📦 dotenv
+4. Crear un archivo `.env` en la raiz del proyecto a partir de `.env.template` y completar los datos de conexión a tu base de datos MySQL.
     ``` .env
    DATABASE_HOST=localhost              # Host local por defecto
    DATABASE_PORT=3306                   # Puerto de MySQL 
@@ -26,21 +44,26 @@ Este proyecto es una API REST básica construida con Node.js, sin frameworks, qu
    MAX_REQUESTS=3                       # Máximo de solicitudes en 20 segundos (simula status 429)
    AUTH_TOKEN=secret-token              # Token hardcodeado (simula status 401 y 403)
    ```
+## 🐬 mysql
+5. Inicializar la base de datos:
 
-4. Inicializar la base de datos:
-
-    Podés usar el archivo `init.sql` ubicado en la raíz del proyecto para crear la base de datos y poblarla con datos de ejemplo.  
-
-5. Ejecutar la aplicación:
+    ( **Opcional** ) Podés usar el archivo `init.sql` ubicado en la raíz del proyecto para crear la base de datos y poblarla con datos de ejemplo.  
+    ```bash
+    npm run init_db 
+    ```
+6. Ejecutar la aplicación:
 
     ```
     npm run dev
     ```
     
-## Incio con Docker
+## 🐳 Incio con Docker
 Requiere tener `Docker Desktop` instalado y en ejecución.  
   
-💡 ***Asegurate de estar ubicado en*** `estructura-grupo-2/caso-001`.
+📁 Asegurate de estar dentro de la carpeta del caso:
+
+    estructura-grupo-2/caso-001
+    
 
 ### 1. Configurar variables de entorno
    Crear un archivo `.env` a partir de `.env.template` y completar los datos:  
@@ -82,11 +105,12 @@ Para ver los logs de la base de datos, podés usar:
 docker-compose logs -f mysql
 ```
 
-## Testing con Postman
+## 🧪 Testing con Postman
 Se incluye la colección `Caso 001.postman_collection.json` en la raíz del proyecto.
 
 ### Importarla en Postman
-1. Abrí Postman.  
-2. Hacé clic en Import.  
-3. Seleccioná el archivo `Caso 001.postman_collection.json`.  
-4. Usá los endpoints para testear la API en `http://localhost:3000`.  
+    1. Abrí Postman.  
+    2. Hacé clic en Import.  
+    3. Seleccioná el archivo `Caso 001.postman_collection.json`.  
+    4. Usá los endpoints para testear la API en `http://localhost:3000`.  
+

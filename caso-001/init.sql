@@ -1,7 +1,7 @@
-CREATE DATABASE product_master;
+CREATE DATABASE IF NOT EXISTS product_master;
 USE product_master;
 
-CREATE TABLE product (
+CREATE TABLE IF NOT EXISTS product (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(45) NOT NULL UNIQUE,
   description VARCHAR(255) NOT NULL

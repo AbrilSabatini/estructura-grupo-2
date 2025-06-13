@@ -23,7 +23,8 @@ Este proyecto es una API REST básica construida con Node.js, sin frameworks, qu
     ```
     npm run dev
     ```
-
+## Docker desktop
+Instala e inicia `docker desktop`
 ## Docker Compose
 1. Construir y levantar los contenedores
     ```bash

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop Lenovo ThinkPad",
+    "description": "Portátil empresarial con procesador Intel Core i7 y 16 GB de RAM."
+  },
+  {
+    "id": 2,
+    "name": "Mouse inalámbrico Logitech",
+    "description": "Mouse ergonómico con conexión Bluetooth y batería recargable."
+  },
+  {
+    "id": 3,
+    "name": "Monitor Samsung 24\"",
+    "description": "Monitor LED Full HD de 24 pulgadas con entrada HDMI y VGA."
+  },
+  {
+    "id": 4,
+    "name": "Teclado mecánico Redragon",
+    "description": "Teclado con retroiluminación RGB y switches blue para una mejor experiencia de escritura."
+  },
+  {
+    "id": 5,
+    "name": "Auriculares Sony WH-1000XM4",
+    "description": "Auriculares con cancelación de ruido activa y hasta 30 horas de batería."
+  }
+]

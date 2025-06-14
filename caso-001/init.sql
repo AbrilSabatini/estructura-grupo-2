@@ -6,6 +6,10 @@ CREATE TABLE IF NOT EXISTS product (
   name VARCHAR(45) NOT NULL UNIQUE,
   description VARCHAR(255) NOT NULL
 );
+-- codificación para que no haya problemas con caracteres especiales
+SET NAMES 'utf8mb4';
+SET CHARACTER SET utf8mb4;
+SET COLLATION_CONNECTION = 'utf8mb4_unicode_ci';
 
 INSERT INTO product (name, description) VALUES
   ('Laptop Lenovo ThinkPad', 'Portátil empresarial con procesador Intel Core i7 y 16 GB de RAM.'),

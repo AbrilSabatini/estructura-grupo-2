@@ -1,3 +1,4 @@
+const { exec, spawn } = require('child_process')
 const fs = require('fs')
 const readline = require('readline')
 
@@ -5,11 +6,26 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
+const runCommand = (command, args) => {
+  const child = spawn(command, args, { stdio: 'inherit' })
 
+  child.on('close', (code) => {
+    if (code !== 0) {
+      console.error(`❌ El proceso terminó con código ${code}`)
+    }
+  })
+}
 const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve))
 
 async function main() {
+    if (fs.existsSync('.env')) {
+    console.log('✅ El archivo .env ya existe. Usando configuración existente.\n')
+    console.log('\n🐳 Levantando contenedor en docker\n')
+    rl.close()
+    runCommand('docker-compose', ["up"])
+    return
+  }
   console.log('\n🛠️  Configuración del entorno')
 
   const password = await ask('🔑 Contraseña de MySQL (puede dejarse vacío): ')
@@ -36,7 +52,8 @@ AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFt
 
   fs.writeFileSync('.env', envContent)
   console.log('\n✅ Archivo .env creado con éxito.\n')
-
+  console.log('\n🐳 Construyendo contenedor en docker\n')
+  runCommand('docker-compose', ["up", "--build"])
   rl.close()
 }
 

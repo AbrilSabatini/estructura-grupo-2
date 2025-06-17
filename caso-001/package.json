@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch ./src/index.js",
-    "build" : "node setup.js && docker-compose up --build"
+    "build" : "node setup.js"  
   },
   "author": "",
   "license": "ISC",

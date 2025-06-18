@@ -35,12 +35,13 @@ Sirve productos desde una base de datos MySQL y está preparado tanto para corre
    DATABASE_HOST=localhost              # Host local por defecto
    DATABASE_PORT=3306                   # Puerto de MySQL 
    DATABASE_USER=root                   # Usuario 
-   DATABASE_PASSWORD=tu_clave  
+   DATABASE_PASSWORD={tu_clave}         # Importante! Puede quedar vacía   
    DATABASE_NAME=product_master       
    ```
 
    Otras variables:
    ``` .env
+   PORT=3000                            # Puerto de la aplicación
    MAX_REQUESTS=3                       # Máximo de solicitudes en 20 segundos (simula status 429)
    AUTH_TOKEN=secret-token              # Token hardcodeado (simula status 401 y 403)
    ```
@@ -68,16 +69,18 @@ Requiere tener `Docker Desktop` instalado y en ejecución.
 ### 1. Configurar variables de entorno
    Crear un archivo `.env` a partir de `.env.template` y completar los datos:  
    ``` .env
+   PORT=3000
    DATABASE_HOST=mysql                # Nombre del servicio en Docker
    DATABASE_PORT=3306                 # Puerto de MySQL 
    DATABASE_USER=root                 
-   DATABASE_PASSWORD=tu_clave  
+   DATABASE_PASSWORD={tu_clave}       # Importante! Puede quedar vacía  
    DATABASE_NAME=product_master       
    ```
 
   Otras variables:
   ``` .env
-  MAX_REQUESTS=3                      # Máximo de solicitudes en 20 segundos (simula status 429) segundos. Simula status code 429
+  PORT=3000                           # Puerto de la aplicación
+  MAX_REQUESTS=3                      # Máximo de solicitudes en 20 segundos (simula status 429). 
   AUTH_TOKEN=secret-token             # Token hardcodeado (simula status 401 y 403)
   ```
 ### 2. Construir y levantar los contenedores  

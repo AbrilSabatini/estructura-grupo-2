@@ -22,9 +22,8 @@ const expectedEnv = {
   DATABASE_USER: 'root',
   DATABASE_NAME: 'product_master',
   DATABASE_HOST: 'mysql',
-  DATABASE_PORT: '3306',
-  PORT: '3000',
-  AUTH_TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30'
+  AUTH_TOKEN:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30',
 }
 // si en el array hay elementos quiere decir que faltan o son inválidos
 const missingOrInvalid = []
@@ -34,20 +33,31 @@ for (const [key, expectedValue] of Object.entries(expectedEnv)) {
   if (!actualValue) {
     missingOrInvalid.push(`${key} FALTANTE`)
   } else if (actualValue !== expectedValue) {
-    missingOrInvalid.push(`${key} ESPERADO ${expectedValue}, ACTUAL => ${actualValue}`)
+    missingOrInvalid.push(
+      `${key} ESPERADO ${expectedValue}, ACTUAL => ${actualValue}`
+    )
   }
 }
 async function main() {
-    if (fs.existsSync('.env') && missingOrInvalid.length === 0) {
-    console.log('✅ El archivo .env ya existe y contiene los elementos necesarios. Usando configuración existente.\n')
+  if (fs.existsSync('.env') && missingOrInvalid.length === 0) {
+    console.log(
+      '✅ El archivo .env ya existe y contiene los elementos necesarios. Usando configuración existente.\n'
+    )
     console.log('\n🐳 Levantando contenedor en docker\n')
     rl.close()
-    runCommand('docker-compose', ["up"])
+    runCommand('docker-compose', ['up'])
     return
   }
   console.log('\n🛠️  Configuración del entorno')
 
   const password = await ask('🔑 Contraseña de MySQL (puede dejarse vacío): ')
+  const port_local = await ask(
+    '🌐 Puerto de la API (por defecto: localhost:3000): '
+  )
+  const host_mysql = await ask(
+    '🖥️ Host de MySQL (por defecto: localhost:3306): '
+  )
+
   let requests
 
   do {
@@ -63,16 +73,16 @@ DATABASE_USER=root
 DATABASE_PASSWORD=${password}
 DATABASE_NAME=product_master
 DATABASE_HOST=mysql
-DATABASE_PORT=3306
-PORT=3000
-MAX_REQUESTS=${requests}
+DATABASE_PORT=${host_mysql || 3306}
+PORT=${port_local || 3000}
+MAX_REQUESTS=${requests || 100}
 AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 `.trim()
 
   fs.writeFileSync('.env', envContent)
   console.log('\n✅ Archivo .env creado con éxito.\n')
   console.log('\n🐳 Construyendo contenedor en docker\n')
-  runCommand('docker-compose', ["up", "--build"])
+  runCommand('docker-compose', ['up', '--build'])
   rl.close()
 }
 

@@ -72,9 +72,9 @@ Requiere tener `Docker Desktop` instalado y en ejecución.
        ```bash
        npm run build
        ```
-       Esto:  
+       Esto:   
         - Crea el archivo .env haciendo preguntas interactivas.  
-        - Levanta automáticamente los contenedores.   
+        - Levanta automáticamente los contenedores.    
 - ### 📝 Opción 2: 
     ### 1. Configuración manual
    
@@ -101,6 +101,32 @@ Requiere tener `Docker Desktop` instalado y en ejecución.
     Esto ejecutará dos servicios:  
          - `app`: la API Node.js (puerto 3000)  
          - `mysql`: el contenedor de base de datos MySQL (puerto 3307)  
+=======
+### 1. Configurar variables de entorno
+   Crear un archivo `.env` a partir de `.env.template` y completar los datos:  
+   ``` .env
+   PORT=3000
+   DATABASE_HOST=mysql                # Nombre del servicio en Docker
+   DATABASE_PORT=3306                 # Puerto de MySQL 
+   DATABASE_USER=root                 
+   DATABASE_PASSWORD={tu_clave}       # Importante! Puede quedar vacía  
+   DATABASE_NAME=product_master       
+   ```
+
+  Otras variables:
+  ``` .env
+  PORT=3000                           # Puerto de la aplicación
+  MAX_REQUESTS=3                      # Máximo de solicitudes en 20 segundos (simula status 429). 
+  AUTH_TOKEN=secret-token             # Token hardcodeado (simula status 401 y 403)
+  ```
+### 2. Construir y levantar los contenedores  
+   ``` bash
+   docker-compose up --build
+   ```
+
+  Esto ejecutará dos servicios:  
+     - `app`: la API Node.js (puerto 3000)  
+     - `mysql`: el contenedor de base de datos MySQL (puerto 3307)  
 
 ### - Apagar los contenedores  
   ```bash

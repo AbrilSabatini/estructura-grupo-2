@@ -1,5 +1,6 @@
 const { spawn } = require('child_process')
 const fs = require('fs')
+const { env } = require('process')
 const readline = require('readline')
 require('dotenv').config()
 const rl = readline.createInterface({
@@ -51,13 +52,17 @@ async function main() {
   console.log('\n🛠️  Configuración del entorno')
 
   const password = await ask('\n🔑 Contraseña de MySQL (puede dejarse vacío): ')
-  const port_local = await ask(
-    '\n🌐 Puerto de la API (por defecto: localhost:3000): '
-  )
-  const host_mysql = await ask(
-    '\n🖥️ Host de MySQL (por defecto: localhost:3306): '
-  )
-
+  let port_local = ''
+  do {
+    port_local = (await ask(
+      '\n🌐 Puerto de la API (por defecto: localhost:3000): '
+    )).trim()
+    if (port_local && isNaN(Number(port_local))) {
+      console.log('\n❌ Debe ser un número válido. Intenta de nuevo.\n')
+    } else {
+      break
+    }
+  } while (true)
   let requests
 
   do {
@@ -68,14 +73,15 @@ async function main() {
       console.log('❌ Debe ser un número positivo. Intenta de nuevo.\n')
     }
   } while (isNaN(requests) || requests <= 0)
-  const envContent = `
+   
+  let envContent = `
 DATABASE_USER=root
 DATABASE_PASSWORD=${password}
 DATABASE_NAME=product_master
 DATABASE_HOST=mysql
-DATABASE_PORT=${host_mysql || 3306}
-PORT=${port_local || 3000}
 MAX_REQUESTS=${requests || 100}
+DATABASE_PORT=3306
+PORT=${port_local || 3000}
 AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 `.trim()
 

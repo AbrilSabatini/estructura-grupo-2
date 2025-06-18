@@ -50,18 +50,18 @@ async function main() {
   }
   console.log('\n🛠️  Configuración del entorno')
 
-  const password = await ask('🔑 Contraseña de MySQL (puede dejarse vacío): ')
+  const password = await ask('\n🔑 Contraseña de MySQL (puede dejarse vacío): ')
   const port_local = await ask(
-    '🌐 Puerto de la API (por defecto: localhost:3000): '
+    '\n🌐 Puerto de la API (por defecto: localhost:3000): '
   )
   const host_mysql = await ask(
-    '🖥️ Host de MySQL (por defecto: localhost:3306): '
+    '\n🖥️ Host de MySQL (por defecto: localhost:3306): '
   )
 
   let requests
 
   do {
-    const input = await ask('⏱️  Cantidad de requests cada 20 seg: ')
+    const input = await ask('\n⏱️  Cantidad de requests cada 20 seg: ')
     requests = Number(input)
 
     if (isNaN(requests) || requests <= 0) {
@@ -81,7 +81,7 @@ AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFt
 
   fs.writeFileSync('.env', envContent)
   console.log('\n✅ Archivo .env creado con éxito.\n')
-  console.log('\n🐳 Construyendo contenedor en docker\n')
+  console.log('\n🐳 Construyendo contenedor en docker...\n')
   runCommand('docker-compose', ['up', '--build'])
   rl.close()
 }

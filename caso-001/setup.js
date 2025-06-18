@@ -1,7 +1,7 @@
-const { exec, spawn } = require('child_process')
+const { spawn } = require('child_process')
 const fs = require('fs')
 const readline = require('readline')
-
+require('dotenv').config()
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -17,10 +17,29 @@ const runCommand = (command, args) => {
 }
 const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve))
+// env mínimo esperado
+const expectedEnv = {
+  DATABASE_USER: 'root',
+  DATABASE_NAME: 'product_master',
+  DATABASE_HOST: 'mysql',
+  DATABASE_PORT: '3306',
+  PORT: '3000',
+  AUTH_TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30'
+}
+// si en el array hay elementos quiere decir que faltan o son inválidos
+const missingOrInvalid = []
 
+for (const [key, expectedValue] of Object.entries(expectedEnv)) {
+  const actualValue = process.env[key]
+  if (!actualValue) {
+    missingOrInvalid.push(`${key} FALTANTE`)
+  } else if (actualValue !== expectedValue) {
+    missingOrInvalid.push(`${key} ESPERADO ${expectedValue}, ACTUAL => ${actualValue}`)
+  }
+}
 async function main() {
-    if (fs.existsSync('.env')) {
-    console.log('✅ El archivo .env ya existe. Usando configuración existente.\n')
+    if (fs.existsSync('.env') && missingOrInvalid.length === 0) {
+    console.log('✅ El archivo .env ya existe y contiene los elementos necesarios. Usando configuración existente.\n')
     console.log('\n🐳 Levantando contenedor en docker\n')
     rl.close()
     runCommand('docker-compose', ["up"])

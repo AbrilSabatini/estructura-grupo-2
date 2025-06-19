@@ -77,10 +77,11 @@ Requiere tener `Docker Desktop` instalado y en ejecución.
        ```
        Esto:   
         - Crea el archivo .env haciendo preguntas interactivas.  
-        - Levanta automáticamente los contenedores.  
-
-        > [!NOTE]  
-        > Podés utilizar el comando `npm run build` para levantar el contenedor sin necesidad de volver a configurar. 
+        - Levanta automáticamente los contenedores.    
+  
+> [!NOTE]
+> Podés utilizar el comando `npm run build` para levantar el contenedor sin necesidad de volver a configurar.
+         
 - ### 📝 Opción 2: 
     ### 1. Configuración manual
    
